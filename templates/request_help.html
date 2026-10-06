@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Request Help - Smart Community Help</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+            padding: 30px;
+        }
+
+        nav {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #16a34a;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            color: #1e40af;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        Smart<span>Community</span>
+    </div>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>🆘 Request Help</h1>
+
+    <p class="subtitle">
+        Tell the community what support you need.
+    </p>
+
+    <div class="info">
+        💡 Please provide accurate information so that
+        volunteers can understand and respond to your request.
+    </div>
+
+
+    <form method="POST" action="/request-help">
+
+        <label for="category">
+            Type of Help
+        </label>
+
+        <select id="category" name="category" required>
+
+            <option value="">
+                Select help category
+            </option>
+
+            <option value="Food">
+                🍱 Food
+            </option>
+
+            <option value="Education">
+                📚 Education
+            </option>
+
+            <option value="Medical">
+                🏥 Medical Support
+            </option>
+
+            <option value="Elderly Assistance">
+                👴 Elderly Assistance
+            </option>
+
+            <option value="Clothes">
+                👕 Clothes
+            </option>
+
+            <option value="Emergency">
+                🚨 Emergency
+            </option>
+
+            <option value="Other">
+                💙 Other
+            </option>
+
+        </select>
+
+
+        <label for="description">
+            Describe Your Need
+        </label>
+
+        <textarea
+            id="description"
+            name="description"
+            placeholder="Explain what kind of help you need..."
+            required
+        ></textarea>
+
+
+        <label for="location">
+            Location
+        </label>
+
+        <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Example: Nashik, Maharashtra"
+            required
+        >
+
+
+        <button type="submit">
+            Submit Help Request 🆘
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,1405 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartCommunity - Admin Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background: #1e3a8a;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        nav h2 {
+            font-size: 22px;
+        }
+
+        nav div {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background: rgba(255,255,255,0.15);
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 35px auto;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid #1e3a8a;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* =========================
+           ANALYTICS
+        ========================= */
+
+        .analytics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .analytics-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .analytics-box h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .analytics-subtitle {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           PROFESSIONAL CATEGORY
+           STATISTICS
+        ========================= */
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .category-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            background: #f8fafc;
+            transition: 0.25s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+            border-color: #bfdbfe;
+        }
+
+        .category-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .category-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #1e3a8a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .category-name {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .category-count {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .category-percentage {
+            font-size: 12px;
+            color: #64748b;
+            margin-left: 6px;
+            font-weight: normal;
+        }
+
+        .category-progress-bg {
+            width: 100%;
+            height: 9px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .category-progress {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+            transition: width 0.6s ease;
+        }
+
+        .top-category {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        .top-category .category-rank {
+            background: #2563eb;
+            color: white;
+        }
+
+        .second-category .category-rank {
+            background: #dbeafe;
+        }
+
+        .third-category .category-rank {
+            background: #e0f2fe;
+        }
+
+        .no-category {
+            color: #64748b;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        /* =========================
+           STATUS OVERVIEW
+        ========================= */
+
+        .status-item {
+            margin-bottom: 20px;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .status-title {
+            font-weight: bold;
+        }
+
+        .status-number {
+            font-weight: bold;
+        }
+
+        .status-progress {
+            width: 100%;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .status-fill {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .pending-fill {
+            background: #f59e0b;
+        }
+
+        .assigned-fill {
+            background: #2563eb;
+        }
+
+        .completed-fill {
+            background: #16a34a;
+        }
+
+        /* =========================
+           COMPLETION BOX
+        ========================= */
+
+        .completion-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .completion-title {
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .completion-number {
+            font-size: 38px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .completion-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           FILTER SECTION
+        ========================= */
+
+        .filter-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .filter-box h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 12px;
+        }
+
+        .filters input,
+        .filters select {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #2563eb;
+        }
+
+        .reset-btn {
+            border: none;
+            background: #64748b;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .reset-btn:hover {
+            background: #475569;
+        }
+
+        /* =========================
+           REQUEST TABLE
+        ========================= */
+
+        .table-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-header h2 {
+            color: #1e3a8a;
+        }
+
+        .loaded-count {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1050px;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .request-id {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .category {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .description {
+            max-width: 220px;
+        }
+
+        /* =========================
+           STATUS BADGES
+        ========================= */
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .assigned {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .completed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .not-assigned {
+            color: #888;
+        }
+
+        /* =========================
+           VIEW BUTTON
+        ========================= */
+
+        .view-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #1e3a8a;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #172554;
+        }
+
+        /* =========================
+           NO RESULTS
+        ========================= */
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 35px;
+            color: #777;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 35px;
+            color: #777;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1200px) {
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            .analytics {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================
+     NAVBAR
+======================================= -->
+
+<nav>
+
+    <h2>⚙️ SmartCommunity Admin</h2>
+
+    <div>
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+        <a href="/logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ======================================
+     MAIN CONTAINER
+======================================= -->
+
+<div class="container">
+
+
+    <!-- HEADING -->
+
+    <div class="heading">
+
+        <h1>
+            Admin Dashboard 📊
+        </h1>
+
+        <p>
+            Monitor users, volunteers and community help requests.
+        </p>
+
+    </div>
+
+
+    <!-- ======================================
+         STATISTICS CARDS
+    ======================================= -->
+
+    <div class="stats">
+
+
+        <div class="card">
+            <h3>👥 Total Users</h3>
+            <div class="number">{{ total_users }}</div>
+        </div>
+
+
+        <div class="card">
+            <h3>🤝 Total Volunteers</h3>
+            <div class="number">{{ total_volunteers }}</div>
+        </div>
+
+
+        <div class="card">
+            <h3>📋 Total Help Requests</h3>
+            <div class="number">{{ total_requests }}</div>
+        </div>
+
+
+        <div class="card">
+            <h3>⏳ Pending Requests</h3>
+            <div class="number">{{ pending_requests }}</div>
+        </div>
+
+
+        <div class="card">
+            <h3>🤝 Assigned Requests</h3>
+            <div class="number">{{ assigned_requests }}</div>
+        </div>
+
+
+        <div class="card">
+            <h3>✅ Completed Requests</h3>
+            <div class="number">{{ completed_requests }}</div>
+        </div>
+
+
+    </div>
+
+
+    <!-- ======================================
+         ANALYTICS
+    ======================================= -->
+
+    <div class="analytics">
+
+
+        <!-- ======================================
+             CATEGORY STATISTICS
+        ======================================= -->
+
+        <div class="analytics-box">
+
+            <h2>
+                📊 Requests by Category
+            </h2>
+
+            <p class="analytics-subtitle">
+                Distribution of community requests by category
+            </p>
+
+
+            {% if category_stats %}
+
+                <div class="category-list">
+
+                    {% for category in category_stats %}
+
+                        <div class="category-card
+                            {% if loop.index == 1 %}top-category{% endif %}
+                            {% if loop.index == 2 %}second-category{% endif %}
+                            {% if loop.index == 3 %}third-category{% endif %}
+                        ">
+
+
+                            <div class="category-top">
+
+                                <div class="category-left">
+
+                                    <div class="category-rank">
+
+                                        {% if loop.index == 1 %}
+                                            🥇
+                                        {% elif loop.index == 2 %}
+                                            🥈
+                                        {% elif loop.index == 3 %}
+                                            🥉
+                                        {% else %}
+                                            {{ loop.index }}
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <span class="category-name">
+
+                                        {{ category["category"] }}
+
+                                    </span>
+
+                                </div>
+
+
+                                <div class="category-count">
+
+                                    {{ category["total"] }}
+
+                                    <span class="category-percentage">
+
+                                        {% if total_requests > 0 %}
+
+                                            ({{ ((category["total"] / total_requests) * 100)|round(0) }}%)
+
+                                        {% else %}
+
+                                            (0%)
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="category-progress-bg">
+
+                                {% if total_requests > 0 %}
+
+                                    <div
+                                        class="category-progress"
+                                        style="width: {{ ((category['total'] / total_requests) * 100)|round(0) }}%;"
+                                    >
+                                    </div>
+
+                                {% else %}
+
+                                    <div
+                                        class="category-progress"
+                                        style="width: 0%;"
+                                    >
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="no-category">
+
+                    📭 No category data available.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ======================================
+             STATUS OVERVIEW
+        ======================================= -->
+
+        <div class="analytics-box">
+
+            <h2>
+                📈 Request Status Overview
+            </h2>
+
+            <p class="analytics-subtitle">
+                Current status of all community help requests
+            </p>
+
+
+            <!-- PENDING -->
+
+            <div class="status-item">
+
+                <div class="status-header">
+
+                    <span class="status-title">
+                        ⏳ Pending
+                    </span>
+
+                    <span class="status-number">
+                        {{ pending_requests }}
+                    </span>
+
+                </div>
+
+                <div class="status-progress">
+
+                    {% if total_requests > 0 %}
+
+                        <div
+                            class="status-fill pending-fill"
+                            style="width: {{ (pending_requests / total_requests * 100)|round(0) }}%;"
+                        ></div>
+
+                    {% else %}
+
+                        <div
+                            class="status-fill pending-fill"
+                            style="width: 0%;"
+                        ></div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ASSIGNED -->
+
+            <div class="status-item">
+
+                <div class="status-header">
+
+                    <span class="status-title">
+                        🤝 Volunteer Assigned
+                    </span>
+
+                    <span class="status-number">
+                        {{ assigned_requests }}
+                    </span>
+
+                </div>
+
+                <div class="status-progress">
+
+                    {% if total_requests > 0 %}
+
+                        <div
+                            class="status-fill assigned-fill"
+                            style="width: {{ (assigned_requests / total_requests * 100)|round(0) }}%;"
+                        ></div>
+
+                    {% else %}
+
+                        <div
+                            class="status-fill assigned-fill"
+                            style="width: 0%;"
+                        ></div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPLETED -->
+
+            <div class="status-item">
+
+                <div class="status-header">
+
+                    <span class="status-title">
+                        ✅ Completed
+                    </span>
+
+                    <span class="status-number">
+                        {{ completed_requests }}
+                    </span>
+
+                </div>
+
+                <div class="status-progress">
+
+                    {% if total_requests > 0 %}
+
+                        <div
+                            class="status-fill completed-fill"
+                            style="width: {{ (completed_requests / total_requests * 100)|round(0) }}%;"
+                        ></div>
+
+                    {% else %}
+
+                        <div
+                            class="status-fill completed-fill"
+                            style="width: 0%;"
+                        ></div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPLETION RATE -->
+
+            <div class="completion-box">
+
+                <div class="completion-title">
+                    Overall Completion Rate
+                </div>
+
+
+                <div class="completion-number">
+
+                    {% if total_requests > 0 %}
+
+                        {{ ((completed_requests / total_requests) * 100)|round(0) }}%
+
+                    {% else %}
+
+                        0%
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="completion-label">
+                    Completed help requests out of total requests
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ======================================
+         FILTER SECTION
+    ======================================= -->
+
+    <div class="filter-box">
+
+        <h2>
+            🔎 Search & Filter Requests
+        </h2>
+
+        <div class="filters">
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search requests..."
+                onkeyup="filterRequests()"
+            >
+
+
+            <select
+                id="categoryFilter"
+                onchange="filterRequests()"
+            >
+
+                <option value="">
+                    All Categories
+                </option>
+
+                {% for category in category_stats %}
+
+                    <option value="{{ category['category']|lower }}">
+                        {{ category["category"] }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <select
+                id="statusFilter"
+                onchange="filterRequests()"
+            >
+
+                <option value="">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="assigned">
+                    Assigned
+                </option>
+
+                <option value="completed">
+                    Completed
+                </option>
+
+            </select>
+
+
+            <button
+                class="reset-btn"
+                onclick="resetFilters()"
+            >
+                Reset
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         REQUEST TABLE
+    ======================================= -->
+
+    <div class="table-box">
+
+
+        <div class="table-header">
+
+            <h2>
+                📋 All Help Requests
+            </h2>
+
+            <div class="loaded-count">
+
+                Total requests loaded:
+                <strong>
+                    {{ all_requests|length }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        {% if all_requests %}
+
+
+        <table id="requestTable">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Category</th>
+
+                    <th>Description</th>
+
+                    <th>Help Seeker</th>
+
+                    <th>Volunteer</th>
+
+                    <th>Location</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            {% for item in all_requests %}
+
+                <tr class="request-row">
+
+
+                    <td>
+
+                        <span class="request-id">
+                            #{{ item["id"] }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="category">
+                            {{ item["category"] }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="description">
+                            {{ item["description"] }}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        👤
+                        {{ item["seeker_name"] or "Unknown" }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if item["volunteer_name"] %}
+
+                            🤝
+                            {{ item["volunteer_name"] }}
+
+                        {% else %}
+
+                            <span class="not-assigned">
+                                Not Assigned
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        📍
+                        {{ item["location"] }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if item["status"] == "Pending" %}
+
+                            <span class="status pending">
+                                ⏳ Pending
+                            </span>
+
+                        {% elif item["status"] == "Volunteer Assigned" %}
+
+                            <span class="status assigned">
+                                🤝 Assigned
+                            </span>
+
+                        {% elif item["status"] == "Completed" %}
+
+                            <span class="status completed">
+                                ✅ Completed
+                            </span>
+
+                        {% else %}
+
+                            <span class="status">
+                                {{ item["status"] }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        <a
+                            href="{{ url_for('admin_request_details', request_id=item['id']) }}"
+                            class="view-btn"
+                        >
+                            👁 View
+                        </a>
+
+                    </td>
+
+
+                </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+
+        </table>
+
+
+        <div
+            id="noResults"
+            class="no-results"
+        >
+            🔍 No matching requests found.
+        </div>
+
+
+        {% else %}
+
+
+            <div class="no-data">
+                📭 No help requests available.
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ======================================
+     JAVASCRIPT
+======================================= -->
+
+<script>
+
+function filterRequests() {
+
+    let search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let category =
+        document
+        .getElementById("categoryFilter")
+        .value
+        .toLowerCase();
+
+
+    let status =
+        document
+        .getElementById("statusFilter")
+        .value
+        .toLowerCase();
+
+
+    let rows =
+        document.querySelectorAll(".request-row");
+
+
+    let visible = 0;
+
+
+    rows.forEach(function(row) {
+
+        let text =
+            row.innerText.toLowerCase();
+
+
+        let categoryText =
+            row.cells[1]
+            .innerText
+            .toLowerCase();
+
+
+        let statusText =
+            row.cells[6]
+            .innerText
+            .toLowerCase();
+
+
+        let searchMatch =
+            text.includes(search);
+
+
+        let categoryMatch =
+            category === "" ||
+            categoryText.includes(category);
+
+
+        let statusMatch = false;
+
+
+        if (status === "") {
+
+            statusMatch = true;
+
+        }
+
+        else if (status === "pending") {
+
+            statusMatch =
+                statusText.includes("pending");
+
+        }
+
+        else if (status === "assigned") {
+
+            statusMatch =
+                statusText.includes("assigned");
+
+        }
+
+        else if (status === "completed") {
+
+            statusMatch =
+                statusText.includes("completed");
+
+        }
+
+
+        if (
+            searchMatch &&
+            categoryMatch &&
+            statusMatch
+        ) {
+
+            row.style.display = "";
+
+            visible++;
+
+        }
+
+        else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+
+    let noResults =
+        document.getElementById("noResults");
+
+
+    if (noResults) {
+
+        if (visible === 0) {
+
+            noResults.style.display = "block";
+
+        }
+
+        else {
+
+            noResults.style.display = "none";
+
+        }
+
+    }
+
+}
+
+
+function resetFilters() {
+
+    document.getElementById("searchInput").value = "";
+
+    document.getElementById("categoryFilter").value = "";
+
+    document.getElementById("statusFilter").value = "";
+
+    filterRequests();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
