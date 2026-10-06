@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Dashboard - SmartCommunity</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #1e3a8a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        nav h2 {
+            font-size: 22px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .logout {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(30,58,138,0.25);
+        }
+
+        .welcome h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #1e3a8a;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.7);
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            border-top: 4px solid #2563eb;
+        }
+
+        .summary-icon {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .summary-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* SECTION */
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            color: #1e3a8a;
+        }
+
+        .section-title span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* REQUEST CARD */
+
+        .request-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            border-left: 5px solid #2563eb;
+        }
+
+        .request-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .request-id {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .request-card h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 21px;
+        }
+
+        .request-card p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .assigned {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .completed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* VOLUNTEER */
+
+        .volunteer-box {
+            background: #ecfdf5;
+            border-left: 5px solid #16a34a;
+            padding: 16px;
+            margin-top: 18px;
+            border-radius: 9px;
+        }
+
+        .volunteer-box strong {
+            color: #166534;
+        }
+
+        .volunteer-box small {
+            display: block;
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            background: white;
+            padding: 55px 30px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .empty .btn {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            margin-top: 7px;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                padding: 25px;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .request-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <h2>🤝 SmartCommunity</h2>
+
+    <div class="nav-links">
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+        <a href="/request-help">
+            🆘 Request Help
+        </a>
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h1>
+            Welcome, {{ session.get("name") }} 👋
+        </h1>
+
+        <p>
+            Manage your community help requests and track
+            their progress from one place.
+        </p>
+
+        <div class="buttons">
+
+            <a href="/request-help" class="btn">
+                ➕ Create Help Request
+            </a>
+
+            <a href="/" class="btn-outline">
+                🏠 Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    {% set total = requests|length %}
+    {% set pending = requests|selectattr("status", "equalto", "Pending")|list|length %}
+    {% set assigned = requests|selectattr("status", "equalto", "Volunteer Assigned")|list|length %}
+    {% set completed = requests|selectattr("status", "equalto", "Completed")|list|length %}
+
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                📋
+            </div>
+
+            <h3>
+                Total Requests
+            </h3>
+
+            <div class="summary-number">
+                {{ total }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ⏳
+            </div>
+
+            <h3>
+                Pending
+            </h3>
+
+            <div class="summary-number">
+                {{ pending }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🤝
+            </div>
+
+            <h3>
+                Volunteer Assigned
+            </h3>
+
+            <div class="summary-number">
+                {{ assigned }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✅
+            </div>
+
+            <h3>
+                Completed
+            </h3>
+
+            <div class="summary-number">
+                {{ completed }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- REQUESTS -->
+
+    <div class="section-title">
+
+        <h2>
+            📋 My Help Requests
+        </h2>
+
+        <span>
+            {{ total }} request(s)
+        </span>
+
+    </div>
+
+
+    {% if requests %}
+
+
+        {% for item in requests %}
+
+
+        <div class="request-card">
+
+
+            <div class="request-top">
+
+                <span class="category">
+                    {{ item["category"] }}
+                </span>
+
+                <span class="request-id">
+                    Request #{{ item["id"] }}
+                </span>
+
+            </div>
+
+
+            <h2>
+                Help Request Details
+            </h2>
+
+
+            <p>
+                <strong>📝 Description</strong><br>
+                {{ item["description"] }}
+            </p>
+
+
+            <p>
+                <strong>📍 Location</strong><br>
+                {{ item["location"] }}
+            </p>
+
+
+            <p>
+
+                <strong>📊 Status</strong><br>
+
+                {% if item["status"] == "Pending" %}
+
+                    <span class="status pending">
+                        ⏳ Pending
+                    </span>
+
+                {% elif item["status"] == "Volunteer Assigned" %}
+
+                    <span class="status assigned">
+                        🤝 Volunteer Assigned
+                    </span>
+
+                {% elif item["status"] == "Completed" %}
+
+                    <span class="status completed">
+                        ✅ Completed
+                    </span>
+
+                {% else %}
+
+                    <span class="status">
+                        {{ item["status"] }}
+                    </span>
+
+                {% endif %}
+
+            </p>
+
+
+            {% if item["volunteer_name"] %}
+
+                <div class="volunteer-box">
+
+                    <strong>
+                        🤝 Volunteer Assigned:
+                        {{ item["volunteer_name"] }}
+                    </strong>
+
+                    <small>
+                        Your request has been accepted by this volunteer.
+                    </small>
+
+                </div>
+
+            {% elif item["status"] == "Pending" %}
+
+                <div class="volunteer-box"
+                     style="background:#fff7ed;border-left-color:#f59e0b;">
+
+                    <strong style="color:#b45309;">
+                        ⏳ Waiting for Volunteer
+                    </strong>
+
+                    <small>
+                        Your request is visible to available volunteers.
+                    </small>
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h2>
+                No Help Requests Yet
+            </h2>
+
+            <p>
+                You haven't created any help request.
+                Create your first request and get community support.
+            </p>
+
+            <a href="/request-help" class="btn">
+                ➕ Create Your First Request
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        Smart Community Help
+    </h3>
+
+    <p>
+        Technology • Community • Social Impact
+    </p>
+
+    <p>
+        © 2026 Smart Community Help
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
+

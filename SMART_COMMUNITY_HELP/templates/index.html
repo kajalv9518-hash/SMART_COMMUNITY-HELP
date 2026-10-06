@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Smart Community Help</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f5f7fb;
+        color: #222;
+    }
+
+    /* NAVBAR */
+
+    nav {
+        background: white;
+        padding: 18px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 23px;
+        font-weight: bold;
+        color: #2563eb;
+    }
+
+    .logo span {
+        color: #16a34a;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .nav-links a:hover {
+        color: #2563eb;
+    }
+
+    .login-btn {
+        background: #2563eb;
+        color: white !important;
+        padding: 10px 18px;
+        border-radius: 8px;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: 520px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 70px 7%;
+        background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    }
+
+    .hero-text {
+        max-width: 600px;
+    }
+
+    .hero-text h1 {
+        font-size: 48px;
+        line-height: 1.15;
+        margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+        color: #2563eb;
+    }
+
+    .hero-text p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        padding: 14px 23px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .primary-btn {
+        background: #2563eb;
+        color: white;
+    }
+
+    .secondary-btn {
+        border: 2px solid #2563eb;
+        color: #2563eb;
+        background: white;
+    }
+
+    .hero-card {
+        width: 350px;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .hero-icon {
+        font-size: 75px;
+        margin-bottom: 15px;
+    }
+
+    .hero-card h2 {
+        margin-bottom: 10px;
+    }
+
+    .hero-card p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* STATS */
+
+    .stats {
+        padding: 50px 7%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        background: white;
+    }
+
+    .stat-card {
+        text-align: center;
+        padding: 25px;
+        border-radius: 15px;
+        background: #f8fafc;
+        border: 1px solid #eef2f7;
+    }
+
+    .stat-card h2 {
+        font-size: 32px;
+        color: #2563eb;
+        margin-bottom: 8px;
+    }
+
+    .stat-card p {
+        color: #666;
+    }
+
+    /* FEATURES */
+
+    .features {
+        padding: 70px 7%;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+        font-size: 34px;
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        color: #666;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        transition: 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-icon {
+        font-size: 40px;
+        margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* REQUESTS */
+
+    .requests {
+        padding: 70px 7%;
+        background: white;
+    }
+
+    /* FILTER AREA */
+
+    .filter-box {
+        background: #f8fafc;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 35px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .filter-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        gap: 12px;
+    }
+
+    .filter-input,
+    .filter-select {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: white;
+        font-size: 14px;
+        outline: none;
+    }
+
+    .filter-input:focus,
+    .filter-select:focus {
+        border-color: #2563eb;
+    }
+
+    .reset-btn {
+        padding: 13px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #374151;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .reset-btn:hover {
+        background: #111827;
+    }
+
+    .result-count {
+        margin-top: 15px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .request-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .request-card {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        padding: 25px;
+        border-radius: 12px;
+        transition: 0.3s;
+    }
+
+    .request-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+    }
+
+    .request-card h3 {
+        margin-bottom: 10px;
+    }
+
+    .request-card p {
+        color: #666;
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    .status {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .status-assigned {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .status-completed {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .status-emergency {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+    }
+
+    .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        grid-column: 1 / -1;
+    }
+
+    /* CTA */
+
+    .cta {
+        margin: 70px 7%;
+        padding: 60px 30px;
+        background: #2563eb;
+        color: white;
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .cta h2 {
+        font-size: 34px;
+        margin-bottom: 15px;
+    }
+
+    .cta p {
+        margin-bottom: 25px;
+        opacity: 0.9;
+    }
+
+    .cta a {
+        display: inline-block;
+        padding: 13px 25px;
+        background: white;
+        color: #2563eb;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    /* FOOTER */
+
+    footer {
+        background: #111827;
+        color: white;
+        padding: 35px 7%;
+        text-align: center;
+    }
+
+    footer p {
+        color: #9ca3af;
+        margin-top: 8px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+        .filter-row {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .feature-grid,
+        .request-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero {
+            gap: 40px;
+        }
+    }
+
+    @media (max-width: 800px) {
+
+        .nav-links {
+            display: none;
+        }
+
+        .hero {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-size: 38px;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .feature-grid,
+        .request-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-card {
+            width: 100%;
+            max-width: 350px;
+        }
+    }
+
+    @media (max-width: 500px) {
+
+        .stats {
+            grid-template-columns: 1fr;
+        }
+
+        .filter-row {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-text h1 {
+            font-size: 32px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+```
+<div class="logo">
+    Smart<span>Community</span>
+</div>
+
+<div class="nav-links">
+
+    <a href="/">Home</a>
+
+    <a href="/request-help">Request Help</a>
+
+    {% if session.get("user_id") %}
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/logout" class="login-btn">
+            Logout
+        </a>
+
+    {% else %}
+
+        <a href="/login" class="login-btn">
+            Login
+        </a>
+
+    {% endif %}
+
+</div>
+```
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+```
+<div class="hero-text">
+
+    <h1>
+        Technology that
+        <span>Connects People.</span>
+    </h1>
+
+    <p>
+        Smart Community Help is a social-impact platform
+        that connects people who need help with volunteers
+        and community members who can help.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="/request-help" class="primary-btn">
+            🆘 Request Help
+        </a>
+
+        <a href="/register" class="secondary-btn">
+            🤝 Join Community
+        </a>
+
+    </div>
+
+</div>
+
+<div class="hero-card">
+
+    <div class="hero-icon">
+        🤝
+    </div>
+
+    <h2>Together We Can Help</h2>
+
+    <p>
+        One small action can make a big difference
+        in someone's life.
+    </p>
+
+</div>
+```
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+```
+<div class="stat-card">
+    <h2>{{ requests|length }}</h2>
+    <p>Help Requests</p>
+</div>
+
+<div class="stat-card">
+    <h2>24/7</h2>
+    <p>Community Support</p>
+</div>
+
+<div class="stat-card">
+    <h2>100%</h2>
+    <p>Social Impact</p>
+</div>
+
+<div class="stat-card">
+    <h2>∞</h2>
+    <p>Possibilities</p>
+</div>
+```
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features">
+
+```
+<div class="section-title">
+
+    <h2>How Our Platform Helps</h2>
+
+    <p>
+        Simple technology designed for real-world community problems.
+    </p>
+
+</div>
+
+<div class="feature-grid">
+
+    <div class="feature-card">
+        <div class="feature-icon">🆘</div>
+        <h3>Request Help</h3>
+        <p>
+            People can submit requests for food,
+            education, elderly assistance, emergency
+            support and other needs.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Volunteer</h3>
+        <p>
+            Volunteers can join the platform and
+            help people in their community.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>Local Support</h3>
+        <p>
+            Location information can help connect
+            requests with nearby community support.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🍱</div>
+        <h3>Food & Donations</h3>
+        <p>
+            Support food donations, clothes,
+            educational materials and other resources.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Assistance</h3>
+        <p>
+            AI can automatically categorize requests
+            and help prioritize urgent cases.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Impact Dashboard</h3>
+        <p>
+            Track requests, volunteers and community
+            impact through a simple dashboard.
+        </p>
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- HELP REQUESTS -->
+
+<section class="requests">
+
+```
+<div class="section-title">
+
+    <h2>Recent Help Requests</h2>
+
+    <p>
+        Search and filter community support requests.
+    </p>
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filter-box">
+
+    <div class="filter-row">
+
+        <input
+            type="text"
+            id="searchInput"
+            class="filter-input"
+            placeholder="🔍 Search request, location or person..."
+        >
+
+        <select id="categoryFilter" class="filter-select">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Emergency">
+                🚨 Emergency
+            </option>
+
+            <option value="Medical">
+                🏥 Medical
+            </option>
+
+            <option value="Food">
+                🍱 Food
+            </option>
+
+            <option value="Education">
+                📚 Education
+            </option>
+
+            <option value="Elderly">
+                👵 Elderly Assistance
+            </option>
+
+        </select>
+
+
+        <select id="statusFilter" class="filter-select">
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="Pending">
+                ⏳ Pending
+            </option>
+
+            <option value="Volunteer Assigned">
+                🤝 Assigned
+            </option>
+
+            <option value="Completed">
+                ✅ Completed
+            </option>
+
+        </select>
+
+
+        <button
+            type="button"
+            class="reset-btn"
+            onclick="resetFilters()"
+        >
+            Reset
+        </button>
+
+    </div>
+
+    <div class="result-count">
+        Showing <strong id="resultCount">{{ requests|length }}</strong>
+        request(s)
+    </div>
+
+</div>
+
+
+<!-- REQUEST CARDS -->
+
+<div class="request-grid" id="requestGrid">
+
+    {% if requests %}
+
+        {% for item in requests %}
+
+            <div
+                class="request-card"
+                data-category="{{ item['category'] }}"
+                data-status="{{ item['status'] }}"
+                data-search="{{ (item['description'] ~ ' ' ~ item['location'] ~ ' ' ~ (item['name'] or 'Community Member') ~ ' ' ~ item['category'])|lower }}"
+            >
+
+                <h3>
+                    {{ item["category"] }}
+                </h3>
+
+                <p>
+                    {{ item["description"] }}
+                </p>
+
+                <p>
+                    📍 {{ item["location"] }}
+                </p>
+
+                <p>
+                    👤 {{ item["name"] or "Community Member" }}
+                </p>
+
+
+                {% if item["category"] == "Emergency" %}
+
+                    <span class="status status-emergency">
+                        🚨 Emergency
+                    </span>
+
+                {% elif item["status"] == "Pending" %}
+
+                    <span class="status status-pending">
+                        ⏳ Pending
+                    </span>
+
+                {% elif item["status"] == "Volunteer Assigned" %}
+
+                    <span class="status status-assigned">
+                        🤝 Volunteer Assigned
+                    </span>
+
+                {% elif item["status"] == "Completed" %}
+
+                    <span class="status status-completed">
+                        ✅ Completed
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="no-result" id="noResult">
+
+        <h3>🔍 No requests found</h3>
+
+        <p>
+            Try changing your search or filters.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+```
+<h2>Be Someone's Reason to Smile ❤️</h2>
+
+<p>
+    Join the community and use technology
+    to create positive social impact.
+</p>
+
+<a href="/register">
+    Join Community
+</a>
+```
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+```
+<h3>Smart Community Help</h3>
+
+<p>
+    Technology • Community • Social Impact
+</p>
+
+<p>
+    © 2026 Smart Community Help
+</p>
+```
+
+</footer>
+
+<!-- SEARCH + FILTER JAVASCRIPT -->
+
+<script>
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const requestCards = document.querySelectorAll(".request-card");
+    const resultCount = document.getElementById("resultCount");
+    const noResult = document.getElementById("noResult");
+
+
+    function filterRequests() {
+
+        const searchText = searchInput.value.toLowerCase().trim();
+        const selectedCategory = categoryFilter.value;
+        const selectedStatus = statusFilter.value;
+
+        let visibleCount = 0;
+
+        requestCards.forEach(card => {
+
+            const category = card.dataset.category;
+            const status = card.dataset.status;
+            const searchData = card.dataset.search;
+
+            const matchesSearch =
+                searchData.includes(searchText);
+
+            const matchesCategory =
+                selectedCategory === "all" ||
+                category === selectedCategory;
+
+            const matchesStatus =
+                selectedStatus === "all" ||
+                status === selectedStatus;
+
+
+            if (
+                matchesSearch &&
+                matchesCategory &&
+                matchesStatus
+            ) {
+
+                card.style.display = "block";
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        resultCount.textContent = visibleCount;
+
+
+        if (visibleCount === 0) {
+
+            noResult.style.display = "block";
+
+        } else {
+
+            noResult.style.display = "none";
+
+        }
+
+    }
+
+
+    function resetFilters() {
+
+        searchInput.value = "";
+        categoryFilter.value = "all";
+        statusFilter.value = "all";
+
+        filterRequests();
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterRequests
+    );
+
+    categoryFilter.addEventListener(
+        "change",
+        filterRequests
+    );
+
+    statusFilter.addEventListener(
+        "change",
+        filterRequests
+    );
+
+</script>
+
+</body>
+</html>
